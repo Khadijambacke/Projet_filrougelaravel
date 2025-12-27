@@ -19,6 +19,9 @@ class DemoSeeder extends Seeder
     {
         // class user qui fait reference a users 
         //:: operateurs de portee
+        
+        //laravel n'accepte pas automatiquement  il faut utiliser le $fillable pour specifier les champs remplisable
+        //$squared permet specifier ce qu'on ne va pas remplir
         User::create([ 
             'name' => 'Admin', 
             'email' => 'admin@test.com', 

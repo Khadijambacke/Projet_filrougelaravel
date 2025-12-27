@@ -8,6 +8,7 @@ use app\Models\Reservation;
 use app\Models\users;
 use Illuminate\Support\Facades\Auth;
 
+
 class MedecinController extends Controller
 {
     public function services()

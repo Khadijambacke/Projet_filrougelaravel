@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Models;
-
+////le modele ORM utiliser
 use Illuminate\Database\Eloquent\Model;
-
-
 class Service extends Model
 {
+  //
     protected $fillable = [ 
         'titre', 
         'description', 

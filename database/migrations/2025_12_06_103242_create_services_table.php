@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('medecin_id')->nullable(); 
             //timestamps:temps de creation et temps de update
             $table->timestamps();
-            ///clee etranger c'est l'inverse de la clee
+            ///clee etranger c'est l'inverse de la clee(id_medecin)
             $table->foreign('medecin_id')->references('id')->on('users');
         });
     }

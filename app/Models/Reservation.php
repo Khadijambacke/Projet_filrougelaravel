@@ -19,8 +19,7 @@ class Reservation extends Model
         { 
             ///belongsTo: fait reference a des cardinalites (1,1)
             ///hasmany:fait reference a des cardinalite(1,n)
-
-       return $this->belongsTo(User::class); 
+         return $this->belongsTo(User::class); 
        } 
        public function service()
         { 

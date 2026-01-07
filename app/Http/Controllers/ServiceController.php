@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;  
+use App\Http\Models;
+use App\Models\User;
 
-use Illuminate\Http\Request;
 use app\Models\Service;
 
 class ServiceController extends Controller
@@ -15,7 +17,8 @@ class ServiceController extends Controller
     $services = Service::where('statut', 'actif') 
                 ->with('medecin') 
                 ->get();  
-    return view('services.index', compact('services'));
+    ///return view('services.index', compact('services'));
+    dd($services);
 
 } 
 public function show($id)

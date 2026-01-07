@@ -13,16 +13,15 @@ class DashboardController extends Controller
    
     public function index()
     { 
-        $user = auth::user(); 
-       
-
+        $user = Auth::user(); 
+        ///check
+        //dd($user):permet de voir l'errur comme cho
         if (!$user) {
             return redirect()->route('show.register'); 
         }
-
-        if ($user->role === 'admin') { 
+        if ($user->role === 'medecin') { 
             return view('dashboard.dashboardAdmin'); 
-                } if ($user->role === 'medecin') { 
+                } if ($user->role === 'admin') { 
                     return view('dashboard.dashbordMedecin'); 
                  } 
         return view('dashboard.dashboardPatient'); 

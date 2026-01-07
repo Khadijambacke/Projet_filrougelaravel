@@ -68,6 +68,7 @@
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
+                                              <!-- pour  capturer les erreurs   -->
                                         @if($errors->any())
                                    <ul class="errors">
                                        @foreach($errors->all() as $errors)

@@ -43,34 +43,35 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/patient', function () {
-    return view('layouts.patient');
-})->name('patient.view');
+// Route::get('/patient', function () {
+//     return view('layouts.patient');
+// })->name('patient.view');
 
-Route::get('/addd', function () {
-    return view('layouts.admin');
+// Route::get('/addd', function () {
+//     return view('layouts.admin');
     
-})->name('principale');
+// })->name('principale');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
 ->middleware('auth')
 ->name('dashboard');
 
-Route::get('/admininash', function () {
-    return view('dashboard.dashboardAdmin');
+// Route::get('/admininash', function () {
+//     return view('dashboard.dashboardAdmin');
 
-})->name('monpage');
+// })->name('monpage');
 //nommer les routes permet de les utiliser  a partir du nom
 //exemple:<a href="{{route'show.register}}" class="btn"> Register </a>
 ///avoir un bouttn qui utlise la fonction route pour nous afficher les url
 ////pouquoi quand quelqu'un se registre il le considere tout de suite comme un patient?
-
+Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/Showregister', [AuthController::class ,'ShowRegister'])->name('show.register');
 Route::get('/login', action: [AuthController::class ,'Showlogin'])->name('show.login');
 Route::post('/register', [AuthController::class ,'register'])->name('register');
 Route::post('/login', action: [AuthController::class ,'login'])->name('login');
-   
+   ///des routs middlewaare(auth,'role=admin')/// a chercher pour aujourdh'ui
 Route::get('/forgot' , function(){
     return view('Auth.forgot-password');
 });
-
+Route::get('/services', [ServiceController::class, 'index']); 
+Route::get('/services/{id}', [ServiceController::class, 'show']); 

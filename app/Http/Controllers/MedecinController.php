@@ -20,7 +20,7 @@ class MedecinController extends Controller
 { 
     $reservations = Reservation::with(['service','user']) 
                     ->whereHas('service', function ($q) { 
-                        $q->where('medecin_id', auth()->users->id()); 
+                        $q->where('medecin_id', auth::id()); 
                     }) 
                     ->get(); 
 return view('medecin.reservations', compact('reservations')); 
@@ -31,7 +31,7 @@ public function updateStatus(Request $request, $id)
 'statut' => 'required|in:confirmée,annulée,effectuée', 
     ]); 
     $reservation = Reservation::findOrFail($id); 
-if ($reservation->service->medecin_id != auth()->users->id()) { 
+if ($reservation->service->medecin_id != auth::id()) { 
         abort(403); 
     } 
     $reservation->update($validated); 

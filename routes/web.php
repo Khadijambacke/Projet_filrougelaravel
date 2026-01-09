@@ -36,11 +36,11 @@ use illuminate\Http\Request;
 ///nom de la  route (/) apres le chemin vers la route
 ///On peut regrouperd es routes par un prefix,un name
 //les mildwares agit comme des filtre:on peut les passer deux parametre middleware(['auth', 'admin']);
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    return view('welcome');
+//     return view('welcome');
 
-})->name('home');
+// })->name('home');
 
 
 // Route::get('/patient', function () {

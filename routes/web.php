@@ -1,11 +1,39 @@
 <?php
 
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index']
+)->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+require __DIR__.'/auth.php';
+
+
+
+
+
+
+
+
 use App\Http\Controllers\AuthController;
 use Faker\Guesser\Name;
-use Illuminate\Support\Facades\Route;
+
 ////pour prendre en compte es contollers
 use app\Http\Controllers\ServiceController; 
-use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\ReservationController;
 use illuminate\Http\Request;
@@ -36,11 +64,7 @@ use illuminate\Http\Request;
 ///nom de la  route (/) apres le chemin vers la route
 ///On peut regrouperd es routes par un prefix,un name
 //les mildwares agit comme des filtre:on peut les passer deux parametre middleware(['auth', 'admin']);
-// Route::get('/', function () {
 
-//     return view('welcome');
-
-// })->name('home');
 
 
 // Route::get('/patient', function () {
@@ -52,9 +76,6 @@ use illuminate\Http\Request;
     
 // })->name('principale');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-->middleware('auth')
-->name('dashboard');
 
 // Route::get('/admininash', function () {
 //     return view('dashboard.dashboardAdmin');
@@ -64,14 +85,28 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 //exemple:<a href="{{route'show.register}}" class="btn"> Register </a>
 ///avoir un bouttn qui utlise la fonction route pour nous afficher les url
 ////pouquoi quand quelqu'un se registre il le considere tout de suite comme un patient?
+Route::prefix('test')->group(function () {
+Route::get('/dashboard', [DashboardController::class, 'index'])
+->middleware('auth')
+->name('dashboard');
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/Showregister', [AuthController::class ,'ShowRegister'])->name('show.register');
 Route::get('/login', action: [AuthController::class ,'Showlogin'])->name('show.login');
 Route::post('/register', [AuthController::class ,'register'])->name('register');
 Route::post('/login', action: [AuthController::class ,'login'])->name('login');
-   ///des routs middlewaare(auth,'role=admin')/// a chercher pour aujourdh'ui
+Route::post('/logout', [AuthController::class, 'logout'])
+->middleware('auth')
+->name('logout');
+;
+   ////des routs middlewaare(auth,'role=admin')//
 Route::get('/forgot' , function(){
     return view('Auth.forgot-password');
 });
 Route::get('/services', [ServiceController::class, 'index']); 
-Route::get('/services/{id}', [ServiceController::class, 'show']); 
+
+// Route::get('/services/{id}', [ServiceController::class, 'show']); 
+
+Route::middleware(['auth', 'role:medecin'])->group(function () {
+    Route::resource('medecins', MedecinController::class);
+   });
+});

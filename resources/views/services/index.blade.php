@@ -1,24 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liste des services</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Nos services</h1>
+@section('content')
+<div class="container">
+    <h1 class="mb-4">Nos services médicaux</h1>
 
-
-    <ul>
-        @foreach($services as $service)
-            <li>
-                <strong>{{ $service->titre }}</strong><br>
-                Prix : {{ $service->prix }} FCFA<br>
-                Durée : {{ $service->duree }} minutes<br>
-                Médecin : {{ $service->medecin->name ?? 'Non défini' }}
-            </li>
-        @endforeach
-    </ul>
-
-
-</body>
-</html>
+    @if($services->isEmpty())
+        <p>Aucun service disponible.</p>
+    @else
+        <div class="row">
+            @foreach($services as $service)
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $service->nom }}</h5>
+                            <p class="card-text">
+                                {{ Str::limit($service->description, 100) }}
+                            </p>
+                            <p><strong>Prix :</strong> {{ $service->prix }} FCFA</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+</div>
+@endsection

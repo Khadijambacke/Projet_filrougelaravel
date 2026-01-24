@@ -54,6 +54,14 @@
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+                    <li class="nav-item mt-3">
+    <form action="{{ route('logout') }}" method="POST" class="px-3">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-block">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+</li>
             </li>
 
             <!-- Divider -->

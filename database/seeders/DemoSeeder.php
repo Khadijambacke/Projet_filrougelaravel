@@ -28,13 +28,13 @@ class DemoSeeder extends Seeder
             'role' => 'admin', 
             'password' => bcrypt('admin123') 
                 ]); 
-                $medecin = User::create([ 
+            $medecin = User::create([ 
             'name' => 'Dr. Alpha', 
             'email' => 'medecin@test.com', 
             'role' => 'medecin', 
             'password' => bcrypt('password') 
                 ]); 
-                Service::create([ 
+            Service::create([ 
             'titre' => 'Consultation générale', 
             'description' => 'Consultation de base.', 
             'prix' => 15000, 

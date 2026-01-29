@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Models;
 use App\Models\User;
 use App\Models\Service;
+use App\Models\Livre;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -40,5 +41,6 @@ public function show($id)
     
     return view('services.show', compact('service')); 
 }
+
 
 }

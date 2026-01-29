@@ -77,10 +77,10 @@ use illuminate\Http\Request;
 // })->name('principale');
 
 
-// Route::get('/admininash', function () {
-//     return view('dashboard.dashboardAdmin');
+Route::get('/admininash', function () {
+    return view('dashboard.dashboardAdmin');
 
-// })->name('monpage');
+})->name('monpage');
 //nommer les routes permet de les utiliser  a partir du nom
 //exemple:<a href="{{route'show.register}}" class="btn"> Register </a>
 ///avoir un bouttn qui utlise la fonction route pour nous afficher les url
@@ -110,3 +110,4 @@ Route::middleware(['auth', 'role:medecin'])->group(function () {
     Route::resource('medecins', MedecinController::class);
    });
 });
+Route::view('/', 'hospital')->name('hospital.home');

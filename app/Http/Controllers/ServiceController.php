@@ -55,9 +55,9 @@ public function store(Request $request)
     ->with('success', 'Service créé avec succès');
 }
 
-public function show($id)
+public function show($services)
 { 
-    $service = Service::with('medecin')->findOrFail($id); 
+    $service = Service::findOrFail($services); 
     return view('messervices.show', compact('service')); 
 }
 public function edit($services){

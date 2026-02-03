@@ -45,6 +45,8 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 /////tout ce qui est lier a un utilisateur 
 Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::get('/dashboardPatient/services', [ServiceController::class, 'index'])->name('servicspatient');
+    Route::get('/dashboardPatient/services/{service}/show', [ServiceController::class, 'show'])->name('detailservice');
     Route::get('/dashboard-patient/services', [ServiceController::class, 'index'])
         ->name('patientservices');
 });
@@ -56,6 +58,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashbordadmin/services/{service}/edit', [ServiceController::class, 'edit'])->name('editservice');
     Route::post('/dashboardadmin/services/{service}/update',[ServiceController::class, 'update'])->name('updateservice');
     Route::post('/dashboardadmin/services/{service}/delete',[ServiceController::class, 'delete'])->name('deleteservice');
+    Route::get('/dashboardadmin/services/{service}/show', [ServiceController::class, 'show'])->name('servicedetails');
     ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
     Route::resource('dashboardadmin/medecin',MedecinController::class)->names('vuemedecin');
     Route::get('/dashbordadmin/reservations', [ReservationController::class, 'index'])->name('reservationsnadmin');

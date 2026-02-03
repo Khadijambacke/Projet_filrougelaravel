@@ -18,7 +18,7 @@
             <p>Prix : {{ $service->prix }} FCFA</p>
             <p>Médecin : {{ $service->medecin->name ?? 'Non attribué' }}</p>
 
-            <a href=""
+            <a href="{{ route('servicedetails', $service->id)}}"
                 class="btn btn-primary btn-sm">
                 Voir plus
             </a>

@@ -20,5 +20,7 @@
     <p>Médecin : {{ $service->medecin->name ?? 'Non attribué' }}</p>
 
     <a href="{{ route('servicspatient') }}" class="btn btn-secondary mt-3">Retour</a>
+    <a href="{{ route('reserver', $service->id)}}" class="btn btn-secondary mt-3">Reserver le service</a>
+
 </div>
 @endsection

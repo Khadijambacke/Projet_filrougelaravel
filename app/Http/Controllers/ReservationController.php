@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\Service;
-use app\Models\User;
-use app\Models\Reservation;
+use App\Models\Service;
+use App\Models\User;
+use App\Models\Reservation;
+
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -15,28 +18,35 @@ class ReservationController extends Controller
         $service = Service::findOrFail($service_id);
         return view('reservations.create', compact('service'));
     }
-    public function store(Request $request)
+
+    public function store(Request $request, Service $service )
     {
         $validated = $request->validate([
-            'service_id' => 'required|exists:services,id',
             'date_reservation' => 'required|date|after_or_equal:today',
             'heure_reservation' => 'required',
             'commentaire' => 'nullable|string',
         ]);
-        $validated['user_id'] = auth();
-        $validated['statut'] = 'en_attente';
-        Reservation::create($validated);
-        /////create permet de faire tout ce que fait php simple avec les rquete
-        return redirect('/mes-reservations')
+    
+        Reservation::create([
+            'user_id' => Auth::id(),
+            'service_id' => $service->id, // 👈 vient de l’URL
+            'date_reservation' => $validated['date_reservation'],
+            'heure_reservation' => $validated['heure_reservation'],
+            'commentaire' => $validated['commentaire'] ?? null,
+            'statut' => 'en_attente',
+        ]);
+    
+        return redirect()
+            ->route('servicspatient', $service->id)
             ->with('success', 'Réservation enregistrée.');
     }
-
+   
     public function myReservations()
     {
         $reservations = Reservation::with('service')
-            ->where('user_id', auth())
+            ->where('user_id', Auth::id())
             ->get();
-        return view('reservations.patient_index', compact('reservations'));
+        return view('patient.reservations.index', compact('reservations'));
     }
     public function cancel($id)
     {

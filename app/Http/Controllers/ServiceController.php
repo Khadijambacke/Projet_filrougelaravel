@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;  
 use App\Http\Models;
 use App\Models\User;
+use App\Models\Reservation;
 use App\Models\Service;
 
 

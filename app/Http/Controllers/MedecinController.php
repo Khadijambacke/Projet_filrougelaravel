@@ -6,35 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use app\Models\Reservation;
 use app\Models\users;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\Auth\LoginRequest;
 
 class MedecinController extends Controller
 {
-    public function services()
-    {
-        $services = Service::where('medecin_id', auth())->get();
-        return view('medecin.services', compact('services'));
-    }
-    public function reservations()
-    {
-        $reservations = Reservation::with(['service', 'user'])
-            ->whereHas('service', function ($q) {
-                $q->where('medecin_id', auth::id());
-            })
-            ->get();
-        return view('medecin.reservations', compact('reservations'));
-    }
-    public function updateStatus(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'statut' => 'required|in:confirmée,annulée,effectuée',
-        ]);
-        $reservation = Reservation::findOrFail($id);
-        if ($reservation->service->medecin_id != auth::id()) {
-            abort(403);
-        }
-        $reservation->update($validated);
-        return back()->with('success', 'Statut mis à jour.');
+    public function index(){
+        return view('services.index');
     }
 }

@@ -30,6 +30,7 @@
                 <span><i class="fa fa-envelope-o"></i> info@company.com</span>
             </div>
         </div>
+        
     </div>
 </header>
 
@@ -55,7 +56,7 @@
                 <li><a href="#about" class="smoothScroll">About</a></li>
                 <li><a href="#team" class="smoothScroll">Doctors</a></li>
                 <li><a href="#news" class="smoothScroll">News</a></li>
-                <li><a href="#appointment" class="smoothScroll">Appointment</a></li>
+                <li><a href="{{ route('dashboard') }}" class="smoothScroll">Appointment</a></li>
                 <li><a href="#google-map" class="smoothScroll">Contact</a></li>
             </ul>
         </div>

@@ -30,7 +30,7 @@
             font-weight: 500;
         }
 
-        .sidebar .nav-link.active,
+        .sidebar .nav-link.active, 
         .sidebar .nav-link:hover {
             background-color: #495057;
             text-decoration: none;
@@ -57,7 +57,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Sidebar -->
     <nav class="sidebar p-3">
@@ -83,7 +82,7 @@
             </li>
             <li class="nav-item mt-auto">
                 <a href="{{ route('logout') }}" class="nav-link"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Déconnexion
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -96,28 +95,16 @@
     <div class="content">
         <!-- Header -->
         <div class="welcome">
-            <h3>Bienvenue, admin {{ Auth::user()->name }} à l'Hôpital Dalal Diamm</h3>
+            <h3>Bienvenue,{{ Auth::user()->name }} à l'Hôpital Dalal Diamm</h3>
         </div>
-        <button>ajouter un medecin</button>
-        <button type="button"
-            class="btn btn-success"
-            data-bs-toggle="modal"
-            data-bs-target="#addServiceModal">
-            Ajouter un service
-        </button>
+        <!-- <div class="boutton">
+            <button>ajouter un services</button>
+            <button>ajouter un medecin</button>
+        </div> -->
+        <!-- Dashboard cards -->
+        @yield('contenu')
     </div>
-
-
-
-
-    <!-- Dashboard cards -->
- 
-
     <!-- Bootstrap JS -->
-    <!-- Bootstrap JS (OBLIGATOIRE POUR MODAL) -->
-    <script src="bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 </body>
 </html>

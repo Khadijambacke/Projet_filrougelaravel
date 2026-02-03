@@ -70,7 +70,7 @@
                 <a href="{{ route('servicsadmin') }}" class="nav-link"> Services de l'hopital</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="{{ route('medecnadmin')  }}" class="nav-link">Medecin</a>
+                <a href="{{ route('vuemedecin.index')  }}" class="nav-link">Medecin</a>
             </li>
             <li class="nav-item mb-2">
                 <a href="{{ route('reservationsnadmin')  }}" class="nav-link"> Rendez-vous patient </a>

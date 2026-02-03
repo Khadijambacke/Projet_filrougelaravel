@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        ///il me fallait ajouter le roe pour qu'il puisse ingnorer le default rol=patient 
+        'role'
     ];
 
     /**
@@ -46,5 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function reservations() { 
+        return $this->hasMany(Reservation::class); 
+        } 
     
 }

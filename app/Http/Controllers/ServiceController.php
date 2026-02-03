@@ -87,7 +87,7 @@ public function delete(Request $request,$service){
     $service->delete();
     return redirect()
     ->route('servicsadmin')
-    ->with('success', 'Service supprime  avec succès');
+    ->with('success', 'Service supprime avec succès');
      
 }
 

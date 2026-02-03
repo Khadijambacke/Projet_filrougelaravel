@@ -56,7 +56,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashbordadmin/services/{service}/edit', [ServiceController::class, 'edit'])->name('editservice');
     Route::post('/dashboardadmin/services/{service}/update',[ServiceController::class, 'update'])->name('updateservice');
     Route::post('/dashboardadmin/services/{service}/delete',[ServiceController::class, 'delete'])->name('deleteservice');
-    Route::get('/dashbordadmin/medecin', [MedecinController::class, 'index'])->name('medecnadmin');
+    ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
+    Route::resource('dashboardadmin/medecin',MedecinController::class)->names('vuemedecin');
     Route::get('/dashbordadmin/reservations', [ReservationController::class, 'index'])->name('reservationsnadmin');
 });
 

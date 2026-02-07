@@ -71,6 +71,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
    
 });
+Route::middleware(['auth', 'role:medecin'])->group(function () {
+    Route::get('/dashboardmedecin/consultations', [MedecinController::class, 'myReservations'])->name('medconsultation');
+    Route::get('/dashboardmedecin/mes-patients', [MedecinController::class, 'myReservations'])->name('medpatient');
+    
+});
 
 ////avant laravel breeze
 //Route::get('/services', [ServiceController::class, 'index']);

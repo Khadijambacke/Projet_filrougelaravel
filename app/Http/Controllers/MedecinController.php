@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
-use app\Models\Reservation;
-use app\Models\User;
+use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,5 +58,20 @@ public function  delete(Request $request,$medecin){
     $medecin->delete();
     return redirect()->route('vuemedecin.index');
 }
+public function myReservations()
+{
+    $medecinId = Auth::id();
+
+    $reservations = Reservation::with('service') ->get();
+    $reservations = $reservations->filter(function($res) {
+        return $res->service->medecin_id == Auth::id();
+    });
+
+       
+       
+
+    return view('medecin.consultations', compact('reservations'));
+}
+
 
 }

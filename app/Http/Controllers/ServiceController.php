@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;  
 use App\Http\Models;
 use App\Models\User;
+use App\Models\Reservation;
 use App\Models\Service;
 
 
@@ -42,9 +43,9 @@ public function store(Request $request)
    
     $validated = $request->validate([
         'titre' => 'required|string|max:255',
-        'description' => 'required|string|max:255',
+        'description' => 'required|string',
         'prix' => 'required|numeric',
-        'duree' => 'required|numeric',
+        'duree' => 'required|string',
         'statut' => 'required|string',
         'medecin_id'=> 'required|exists:users,id', // assure que le medecin existe
     ]);

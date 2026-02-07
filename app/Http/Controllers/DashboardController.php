@@ -20,12 +20,14 @@ class DashboardController extends Controller
         if (!$user) {
             return redirect()->route('show.register'); 
         }
-        if ($user->role === 'medecin') { 
-            return view('dashboard.dashboardMedecin'); 
-                } if ($user->role === 'admin') { 
-                    return view('dashboard.dashboardAdmin'); 
-                 } 
-        return view('dashboard.dashboardPatient'); 
+       if ($user->role === 'medecin') {
+    return view('dashboard.dashboardMedecin');
+} elseif ($user->role === 'admin') {
+    return view('dashboard.dashboardAdmin');
+} else {
+    return view('dashboard.dashboardPatient');
+}
+
     }
 }
 

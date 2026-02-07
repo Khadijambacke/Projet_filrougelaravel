@@ -32,6 +32,7 @@
                     <!-- Bouton Supprimer -->
                     <form action="" method="POST" style="display:inline-block;">
                         @csrf
+                        
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger"
                             onclick="return confirm('Voulez-vous vraiment supprimer ce médecin ?')">

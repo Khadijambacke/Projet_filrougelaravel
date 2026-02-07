@@ -70,7 +70,7 @@
                 <a href="{{ route('patientservices') }}" class="nav-link">Services</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="" class="nav-link">Rendez-vous</a>
+                <a href="{{ route('mesreservations' , ) }}" class="nav-link">Rendez-vous</a>
             </li>
             <li class="nav-item mt-auto">
                 <a href="{{ route('logout') }}" class="nav-link"

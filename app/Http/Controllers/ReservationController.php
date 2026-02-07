@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ReservationController extends Controller
 {
+    //index pour l'admin
+    public function index(){
+        $reservations = Reservation::with(['user', 'service'])->latest()->get();
+        return view('reservations.indexadmin', compact('reservations'));
+    }
     public function create($service_id)
     {
         $service = Service::findOrFail($service_id);
@@ -29,7 +34,7 @@ class ReservationController extends Controller
     
         Reservation::create([
             'user_id' => Auth::id(),
-            'service_id' => $service->id, // 👈 vient de l’URL
+            'service_id' => $service->id, 
             'date_reservation' => $validated['date_reservation'],
             'heure_reservation' => $validated['heure_reservation'],
             'commentaire' => $validated['commentaire'] ?? null,
@@ -47,6 +52,16 @@ class ReservationController extends Controller
             ->where('user_id', Auth::id())
             ->get();
         return view('patient.reservations.index', compact('reservations'));
+    }
+    public function update(Request $request, Reservation $reservation){
+        $request->validate([
+            'statut' => 'required|in:en_attente,confirmee,annulee,effectuee',
+        ]);
+        $reservation->update([
+            'statut' => $request->statut,
+        ]);
+        return back()->with('success', 'Statut de la réservation mis à jour.');
+    
     }
     public function cancel($id)
     {

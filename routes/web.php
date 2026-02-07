@@ -66,7 +66,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboardadmin/services/{service}/show', [ServiceController::class, 'show'])->name('servicedetails');
     ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
     Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedecin');
-    Route::get('/dashbordadmin/reservations', [ReservationController::class, 'index'])->name('reservationsnadmin');
+    Route::resource('dashboardadmin/patient', MedecinController::class)->names('vuemedecin');
+
+    Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
+   
 });
 
 ////avant laravel breeze

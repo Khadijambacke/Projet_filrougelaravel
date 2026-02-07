@@ -11,8 +11,9 @@
             // Mapping des statuts vers les classes Bootstrap
             $statusColors = [
                 'en_attente' => 'warning',
-                'reserve' => 'primary',
-                'termine' => 'success',
+                'annulee' => 'danger',
+                'confirmee'=>'primary',
+                'effectuee' => 'success',
             ];
         @endphp
 

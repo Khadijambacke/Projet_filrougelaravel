@@ -3,8 +3,9 @@
 @section('contenu')
 <h2>Modifier le service</h2>
 
-<form action="{{ route('vuemedecin.update', $service->id) }}" method="POST">
+<form action="{{ route('updateservice', $service->id) }}" method="POST">
     @csrf
+    
     <div class="mb-3">
         <label class="form-label">Nom du service</label>
         <input type="text" name="titre" class="form-control" value="{{ $service->titre }}" required>

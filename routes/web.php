@@ -31,6 +31,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'Showlogin'])->name('show.login');
     Route::get('/register', [AuthController::class, 'ShowRegister'])->name('show.register');
+    
 });
 /////connection utilisateur
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -45,8 +46,13 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 /////tout ce qui est lier a un utilisateur 
 Route::middleware(['auth', 'role:patient'])->group(function () {
+    //services
     Route::get('/dashboardPatient/services', [ServiceController::class, 'index'])->name('servicspatient');
     Route::get('/dashboardPatient/services/{service}/show', [ServiceController::class, 'show'])->name('detailservice');
+    ///reservations
+    Route::get('/dashboardPatient/services/{service}/show/reservation', [ReservationController::class, 'create'])->name('reserver');
+    Route::post('/dashboardPatient/services/{service}/show/reservation',[ReservationController::class, 'store'])->name('storereservations');
+    Route::get('/dashboardPatient/mesreservations',[ReservationController::class, 'myReservations'] )->name('mesreservations');
     Route::get('/dashboard-patient/services', [ServiceController::class, 'index'])
         ->name('patientservices');
 });
@@ -56,12 +62,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboardadmin/services', [ServiceController::class, 'index'])->name('servicsadmin');
     Route::post('/dashboardadmin/services/store', [ServiceController::class, 'store'])->name('storeservice');
     Route::get('/dashbordadmin/services/{service}/edit', [ServiceController::class, 'edit'])->name('editservice');
-    Route::post('/dashboardadmin/services/{service}/update',[ServiceController::class, 'update'])->name('updateservice');
-    Route::post('/dashboardadmin/services/{service}/delete',[ServiceController::class, 'delete'])->name('deleteservice');
+    Route::post('/dashboardadmin/services/{service}/update', [ServiceController::class, 'update'])->name('updateservice');
+    Route::post('/dashboardadmin/services/{service}/delete', [ServiceController::class, 'delete'])->name('deleteservice');
     Route::get('/dashboardadmin/services/{service}/show', [ServiceController::class, 'show'])->name('servicedetails');
     ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
-    Route::resource('dashboardadmin/medecin',MedecinController::class)->names('vuemedecin');
-    Route::get('/dashbordadmin/reservations', [ReservationController::class, 'index'])->name('reservationsnadmin');
+    Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedecin');
+    Route::resource('dashboardadmin/patient', MedecinController::class)->names('vuemedecin');
+    Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
+   
+});
+Route::middleware(['auth', 'role:medecin'])->group(function () {
+    Route::get('/dashboardmedecin/consultations', [MedecinController::class, 'myReservations'])->name('medconsultation');
+    Route::get('/dashboardmedecin/mes-patients', [MedecinController::class, 'myReservations'])->name('medpatient');
+    
 });
 
 ////avant laravel breeze

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\Reservation;
-
+use App\Mail\ReservationMail;
+use Illuminate\Support\Facades\Mail; 
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -22,17 +23,22 @@ class ReservationController extends Controller
     {
         $service = Service::findOrFail($service_id);
         return view('reservations.create', compact('service'));
+        
     }
 
     public function store(Request $request, Service $service )
     {
+        
+        $user = Auth::user();
+        $email = $user->email; 
         $validated = $request->validate([
             'date_reservation' => 'required|date|after_or_equal:today',
             'heure_reservation' => 'required',
             'commentaire' => 'nullable|string',
         ]);
     
-        Reservation::create([
+        
+        $reservation= Reservation::create([
             'user_id' => Auth::id(),
             'service_id' => $service->id, 
             'date_reservation' => $validated['date_reservation'],
@@ -40,10 +46,16 @@ class ReservationController extends Controller
             'commentaire' => $validated['commentaire'] ?? null,
             'statut' => 'en_attente',
         ]);
+        Mail::to($email)->send(new ReservationMail($user, $reservation ,$service ));
+
     
         return redirect()
             ->route('servicspatient', $service->id)
             ->with('success', 'Réservation enregistrée.');
+        
+            
+
+    
     }
    
     public function myReservations()

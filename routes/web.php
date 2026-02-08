@@ -31,6 +31,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'Showlogin'])->name('show.login');
     Route::get('/register', [AuthController::class, 'ShowRegister'])->name('show.register');
+    
 });
 /////connection utilisateur
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -67,7 +68,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
     Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedecin');
     Route::resource('dashboardadmin/patient', MedecinController::class)->names('vuemedecin');
-
     Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
    
 });

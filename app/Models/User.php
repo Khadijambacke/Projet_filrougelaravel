@@ -22,10 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        ///il me fallait ajouter le roe pour qu'il puisse ingnorer le default rol=patient 
+        ///il me fallait ajouter le role pour qu'il puisse ingnorer le default rol=patient 
         'role'
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *

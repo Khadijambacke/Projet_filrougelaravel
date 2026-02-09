@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
+
+
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 //on impore hash pour les mot de passe
 ////use controller as c
@@ -61,4 +66,33 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+    public function redirectToGoogle()
+{
+    return Socialite::driver('google')->redirect();
+}
+
+public function handleGoogleCallback()
+{
+    try {
+        $googleUser = Socialite::driver('google')->user();
+
+        $user = User::updateOrCreate(
+            ['email' => $googleUser->getEmail()],
+            [
+                'name' => $googleUser->getName() ?? 'Utilisateur Google',
+                'provider' => 'google',
+                'provider_id' => $googleUser->getId(),
+                'password' => bcrypt(Str::random(32)),
+            ]
+        );
+
+        Auth::login($user);
+        return redirect()->intended('dashboard');
+
+    } catch (\Exception $e) {
+        return redirect('/login')->with('error', 'Erreur lors de la connexion avec Google.');
+    }
+}
+
+    
 }

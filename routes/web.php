@@ -23,14 +23,19 @@ use illuminate\Http\Request;
 
 
 
+
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard');
 
+    Route::get('/login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('/login/google/callback', [AuthController::class, 'handleGoogleCallback']);
 ///j'ai fais ca pour donner des restrictons au utilisateurs deja connecter pour qu'ils ne puissent avoir acces a ces pages
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'Showlogin'])->name('show.login');
     Route::get('/register', [AuthController::class, 'ShowRegister'])->name('show.register');
+    
+
     
 });
 /////connection utilisateur

@@ -37,10 +37,8 @@ class ServiceController extends Controller
 //     return view('patient.services.index', compact('services', 'medecins'));
 
 // }
-
 public function store(Request $request)
 {
-   
     $validated = $request->validate([
         'titre' => 'required|string|max:255',
         'description' => 'required|string',
@@ -55,7 +53,6 @@ public function store(Request $request)
     ->route('servicsadmin')
     ->with('success', 'Service créé avec succès');
 }
-
 public function show($services)
 { 
     $service = Service::findOrFail($services); 

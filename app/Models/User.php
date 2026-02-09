@@ -23,7 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         ///il me fallait ajouter le role pour qu'il puisse ingnorer le default rol=patient 
-        'role'
+        'role',
+        'provider' ,    // ajouté
+        'provider_id'
     ];
     /**
      * The attributes that should be hidden for serialization.

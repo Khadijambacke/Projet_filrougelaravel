@@ -44,10 +44,10 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/forgot', function () {
     return view('Auth.forgot-password');
 });
-///deconnexion
+///deconnexiongh
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
-    ->name('logout');;
+    ->name('logout');
 
 /////tout ce qui est lier a un utilisateur 
 Route::middleware(['auth', 'role:patient'])->group(function () {

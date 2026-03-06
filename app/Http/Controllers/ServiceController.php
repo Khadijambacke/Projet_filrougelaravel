@@ -63,6 +63,7 @@ public function edit($services){
     $service=Service::findOrFail($services);
     return view('messervices.edit', compact('service', 'medecins'));
 }
+
 public function update(Request $request,$service)
 {
     $service = Service::findOrFail($service);

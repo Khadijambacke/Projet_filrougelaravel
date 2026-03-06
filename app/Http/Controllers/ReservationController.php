@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ReservationController extends Controller
 {
-    //index pour l'admin
     public function index(){
         $reservations = Reservation::with(['user', 'service'])->latest()->get();
         return view('reservations.indexadmin', compact('reservations'));

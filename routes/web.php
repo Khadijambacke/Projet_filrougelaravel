@@ -30,12 +30,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
     Route::get('/login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
     Route::get('/login/google/callback', [AuthController::class, 'handleGoogleCallback']);
-///j'ai fais ca pour donner des restrictons au utilisateurs deja connecter pour qu'ils ne puissent avoir acces a ces pages
+    
+/// donner des restrictons au utilisateurs deja connecter pour qu'ils ne puissent avoir acces a ces pages
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'Showlogin'])->name('show.login');
     Route::get('/register', [AuthController::class, 'ShowRegister'])->name('show.register');
-    
-
     
 });
 /////connection utilisateur
@@ -70,16 +69,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/dashboardadmin/services/{service}/update', [ServiceController::class, 'update'])->name('updateservice');
     Route::post('/dashboardadmin/services/{service}/delete', [ServiceController::class, 'delete'])->name('deleteservice');
     Route::get('/dashboardadmin/services/{service}/show', [ServiceController::class, 'show'])->name('servicedetails');
-    ///autre methode pou mes routes et sa bme simplife tout les methodes a c route medecin
+    ///autre methode pour mes routes et sa pouvoir simplife tout les methodes http
+
     Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedecin');
     Route::resource('dashboardadmin/patient', MedecinController::class)->names('vuemedecin');
     Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
-   
+   ////routes Api
+
+
 });
+///commande curl
+
 Route::middleware(['auth', 'role:medecin'])->group(function () {
     Route::get('/dashboardmedecin/consultations', [MedecinController::class, 'myReservations'])->name('medconsultation');
     Route::get('/dashboardmedecin/mes-patients', [MedecinController::class, 'myReservations'])->name('medpatient');
     
+
 });
 
 ////avant laravel breeze

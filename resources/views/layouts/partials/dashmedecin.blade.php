@@ -63,6 +63,7 @@
             </li>
             <li class="nav-item mb-2">
                 <a href="{{ route('medpatient') }}" class="nav-link">Mes patients</a>
+                <a href="{{ asset('public/ressources/css/1.css') }}" class="nav-link">Mes patients</a>
             </li>
             <li class="nav-item mt-auto">
                 <a href="#" class="nav-link"

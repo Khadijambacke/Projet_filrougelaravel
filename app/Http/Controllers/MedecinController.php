@@ -29,7 +29,7 @@ class MedecinController extends Controller
     // Crée le service
     User::create($validated);
     return redirect()
-    ->route('vuemedcin.index')
+    ->route('vuemedecin.index')
     ->with('success', 'medecin créé avec succès');
 
     }
@@ -50,13 +50,13 @@ class MedecinController extends Controller
     ]);
     $medecin->update($validated);
     return redirect()
-        ->route('vuemedcin.index')
+        ->route('vuemedecin.index')
         ->with('success', 'Service mis à jour avec succès');
 }
 public function  delete(Request $request,$medecin){
     $medecin = User::findOrFail($medecin);
     $medecin->delete();
-    return redirect()->route('vuemedcin.index');
+    return redirect()->route('vuemedecin.index');
 }
 public function myReservations()
 {

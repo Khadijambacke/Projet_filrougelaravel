@@ -25,7 +25,7 @@
                 <td>{{ $medecin->email }}</td>
                 <td>
                     <!-- Bouton Modifier -->
-                    <a href="{{ route('vuemedcin.edit',$medecin->id )}}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('vuemedecin.edit',$medecin->id )}}" class="btn btn-sm btn-primary">
                         Modifier
                     </a>
 
@@ -55,7 +55,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form action="{{ route('vuemedcin.store') }}" method="POST">
+            <form action="{{ route('vuemedecin.store') }}" method="POST">
                 @csrf
 
                 <div class="modal-body">

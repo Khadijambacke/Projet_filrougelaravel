@@ -71,8 +71,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboardadmin/services/{service}/show', [ServiceController::class, 'show'])->name('servicedetails');
     ///autre methode pour mes routes et sa pouvoir simplife tout les methodes http
 
-    // Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedcin');
-    Route::resource('dashboardadmin/patient', MedecinController::class)->names('vuemedecin');
+    Route::resource('dashboardadmin/medecin', MedecinController::class)->names('vuemedecin');
+
     Route::resource('/dashbordadmin/reservations', ReservationController::class)->names('reservationsnadmin')->only(['index', 'update', 'destroy']);
    ////routes Api
 

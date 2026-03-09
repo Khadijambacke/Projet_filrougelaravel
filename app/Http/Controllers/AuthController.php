@@ -21,7 +21,7 @@ class AuthController extends Controller
 {
     public function ShowRegister(Request $request)
     {
-        return view('Auth.register');
+        return view('auth.register');
     }
     public function Showlogin(Request $request)
     {

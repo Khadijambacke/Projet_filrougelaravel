@@ -5,7 +5,7 @@
 
     <h4 class="mb-4">Modifier le médecin</h4>
 
-    <form action="{{ route('vuemedecin.update', $medecin->id) }}" method="POST">
+    <form action="{{ route('vuemedcin.update', $medecin->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-primary">
                 Mettre à jour
             </button>
-            <a href="{{ route('vuemedecin.index') }}" class="btn btn-secondary">
+            <a href="{{ route('vuemedcin.index') }}" class="btn btn-secondary">
                 Retour
             </a>
         </div>

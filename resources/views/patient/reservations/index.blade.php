@@ -8,7 +8,6 @@
         <p class="text-gray-500">Vous n'avez aucune réservation pour le moment.</p>
     @else
         @php
-            // Mapping des statuts vers les classes Bootstrap
             $statusColors = [
                 'en_attente' => 'warning',
                 'annulee' => 'danger',

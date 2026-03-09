@@ -3,8 +3,6 @@ Auth::user()->role === 'admin'
 ? 'layouts.dashadmin'
 : 'layouts.dashpatient'
 )
-
-
 @section('contenu')
 <div class="container">
     <h2>{{ $service->titre }}</h2>

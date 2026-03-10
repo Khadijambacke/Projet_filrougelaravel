@@ -24,13 +24,13 @@ class DemoSeeder extends Seeder
         //$squared permet specifier ce qu'on ne va pas remplir
         User::create([ 
             'name' => 'Admin', 
-            'email' => 'admin@test.com', 
+            'email' => 'admin@gmail.com', 
             'role' => 'admin', 
             'password' => bcrypt('admin123') 
                 ]); 
             $medecin = User::create([ 
             'name' => 'Dr. Alpha', 
-            'email' => 'medecin@test.com', 
+            'email' => 'medcin@test.com', 
             'role' => 'medecin', 
             'password' => bcrypt('password') 
                 ]); 

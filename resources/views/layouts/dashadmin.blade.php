@@ -8,7 +8,54 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="{{ asset('assets/css/dashadmin.css') }}" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            background-color: #f0f2f5;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-link.active, 
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+            text-decoration: none;
+        }
+
+        /* Content */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        /* Cards */
+        .card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
     <!-- Sidebar -->

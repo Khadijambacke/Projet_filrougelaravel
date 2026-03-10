@@ -21,11 +21,11 @@ class AuthController extends Controller
 {
     public function ShowRegister(Request $request)
     {
-        return view('auth.register');
+        return view('Auth.register');
     }
     public function Showlogin(Request $request)
     {
-        return view('auth.login');
+        return view('Auth.login');
     }
     ///validated methode permettra de faire des validation ,des controlles,
     public function register(Request $request)

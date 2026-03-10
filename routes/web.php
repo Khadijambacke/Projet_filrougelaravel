@@ -21,9 +21,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use illuminate\Http\Request;
 
-
-
-
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard');

@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/forgot', function () {
-    return view('Auth.forgot-password');
+    return view('auth.forgot-password');
 });
 ///deconnexiongh
 Route::post('/logout', [AuthController::class, 'logout'])

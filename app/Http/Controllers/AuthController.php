@@ -38,7 +38,7 @@ class AuthController extends Controller
         ]);
         $user = User::create($validated);
         Auth::login($user);
-        return redirect()->route('show.login')->with('success', 'Compte créé avec succès.');;
+        return redirect()->route('auth.login')->with('success', 'Compte créé avec succès.');;
     }
     public function login(Request $request)
     {

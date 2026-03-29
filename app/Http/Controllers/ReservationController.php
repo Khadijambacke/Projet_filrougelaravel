@@ -35,6 +35,7 @@ class ReservationController extends Controller
             'heure_reservation' => 'required',
             'commentaire' => 'nullable|string',
         ]);
+       
     
         
         $reservation= Reservation::create([

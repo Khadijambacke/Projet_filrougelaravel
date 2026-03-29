@@ -64,12 +64,16 @@
                 placeholder="Ex : douleur, urgence, précision..."
             ></textarea>
         </div>
-
+    
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">
                 Confirmer la réservation
             </button>
-
+            @if($errors->has('error'))
+    <div class="alert alert-danger">
+        {{ $errors->first('error') }}
+    </div>
+@endif
             <a href="{{ route('servicspatient') }}" class="btn btn-secondary">
                 Annuler
             </a>

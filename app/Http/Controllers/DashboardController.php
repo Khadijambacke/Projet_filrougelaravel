@@ -6,7 +6,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Http\Requests\Auth\LoginRequest;
-
+use App\Models\Reservation;
+use App\Models\Service;
 
 class DashboardController extends Controller
 {
@@ -15,6 +16,12 @@ class DashboardController extends Controller
     public function index()
     { 
         $user = Auth::user(); 
+        $nbrrendezvous=Reservation::where('user_id', $user->id)->count();
+        $recentReservations = Reservation::where('user_id', $user->id)
+        ->latest()
+        ->take(5)
+        ->get();
+
         ///check
         //dd($user):permet de voir l'errur comme cho
         if (!$user) {
@@ -25,7 +32,7 @@ class DashboardController extends Controller
 } elseif ($user->role === 'admin') {
     return view('dashboard.dashboardAdmin');
 } else {
-    return view('dashboard.dashboardPatient');
+    return view('dashboard.dashboardPatient', compact('nbrrendezvous'));
 }
 
     }

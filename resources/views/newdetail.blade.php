@@ -1,70 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <title>Health - News Details</title>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS -->
+    <title>{{ $service->titre }} - Clinique Africaine</title>
     <link rel="stylesheet" href="{{ asset('assetpatient/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assetpatient/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assetpatient/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assetpatient/css/tooplate-style.css') }}">
 </head>
+<body>
 
-<body id="top">
+<!-- Header (copié de ta page principale) -->
+@include('partials.header')
 
-<!-- MENU -->
-<section class="navbar navbar-default navbar-static-top">
+<!-- DETAIL SERVICE -->
+<section style="padding:80px 0; background:#f9f9f9;">
     <div class="container">
-        <div class="navbar-header">
-            <a href="{{ route('hospital.home') }}" class="navbar-brand">
-                <i class="fa fa-h-square"></i>ealth Center
-            </a>
+
+        <h2 style="color:#0D5C4A; margin-bottom:20px;">{{ $service->titre }}</h2>
+
+        <p style="color:#555; font-size:1.2rem; line-height:1.8;">
+            {{ $service->description_longue ?? $service->description }}
+        </p>
+
+        <!-- Images du service -->
+        @if($service->images)
+            <div class="row g-3 mb-4">
+                @foreach($service->images as $img)
+                    <div class="col-md-4 text-center">
+                        <img src="{{ asset('storage/' . $img['path']) }}" class="img-fluid rounded shadow-sm">
+                        @if(!empty($img['legende']))
+                            <p style="color:#08342a; margin-top:5px;">{{ $img['legende'] }}</p>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        <p style="font-weight:600; color:#0D5C4A;">
+            Médecin : {{ $service->medecin->name ?? 'Non attribué' }} <br>
+            Durée : {{ $service->duree }} min <br>
+            Prix : {{ number_format($service->prix,0,',',' ') }} FCFA
+        </p>
+
+        <!-- Boutons -->
+        <div style="display:flex; gap:15px; margin-top:30px;">
+            <a href="{{ route('services') }}" class="btn btn-outline-primary">← Retour aux services</a>
+            
+            @auth
+                @if(auth()->user()->role === 'patient')
+                    <a href="{{ route('reserver', $service->id) }}" class="btn btn-primary">Réserver ce service</a>
+                @endif
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">Réserver ce service</a>
+            @endauth
         </div>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ route('hospital.home') }}">Home</a></li>
-            <li><a href="{{ route('hospital.home') }}#news">News</a></li>
-        </ul>
     </div>
 </section>
 
-<!-- NEWS DETAIL -->
-<section id="news-detail">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-8">
-                <img src="{{ asset('assetpatient/images/news-image3.jpg') }}" class="img-responsive">
-                <h2>Review Annual Medical Research</h2>
-                <p>
-                    Aenean molestie porttitor lorem sed semper. Aliquam semper iaculis libero.
-                </p>
-            </div>
-
-            <div class="col-md-4">
-                <h4>Recent Posts</h4>
-                <img src="{{ asset('assetpatient/images/news-image1.jpg') }}" class="img-responsive">
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <div class="container text-center">
-        <p>© 2024 Health Center</p>
-    </div>
-</footer>
-
-<!-- JS -->
-<script src="{{ asset('assetpatient/js/jquery.js') }}"></script>
-<script src="{{ asset('assetpatient/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assetpatient/js/wow.min.js') }}"></script>
-<script src="{{ asset('assetpatient/js/custom.js') }}"></script>
+<!-- Footer (copié de ta page principale) -->
+@include('partials.footer')
 
 </body>
 </html>

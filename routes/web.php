@@ -5,7 +5,19 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
-Route::view('/', 'hospital')->name('hospital.home');
+
+///Route::view('/', 'hospital')->name('hospital.home');
+Route::get('/', function () {
+    $services = \App\Models\Service::with('medecin')
+        ->where('statut', 'actif')
+        ->take(6)
+        ->get();
+    $stats = [
+        'services'     => \App\Models\Service::count(),
+
+    ];
+    return view('hospital', compact('services', 'stats'));
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -32,6 +32,13 @@ class ServiceController extends Controller
         }
          return view('patient.services.index', compact('services'));
     }
+    public function indexservice()
+    { 
+
+        $services = Service::where('statut', 'actif')->get();
+       
+         return view('hospital', compact('services'));
+    }
 // public function create(){
 //     $medecins = User::where('role', 'medecin')->get();
 //     return view('patient.services.index', compact('services', 'medecins'));

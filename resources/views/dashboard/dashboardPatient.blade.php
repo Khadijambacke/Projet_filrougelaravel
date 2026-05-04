@@ -207,13 +207,27 @@ body {
 
     </div>
 
-    <!-- ACTIVITY -->
-    <div class="activity">
-        <h6 style="color:#0D5C4A;">Activité récente</h6>
-        <p>• Rendez-vous confirmé avec Cardiologie</p>
-        <p>• Nouveau service ajouté : Radiologie</p>
-        <p>• Mise à jour de votre profil</p>
+    @if($nextRdv)
+    <div class="activity-item">
+        <strong>{{ $nextRdv->service->name ?? 'Service' }}</strong>
+
+        <div class="mt-1">
+            <small>
+                {{ \Carbon\Carbon::parse($nextRdv->date_reservation)->format('d M Y à H:i') }}
+            </small>
+        </div>
+
+        <div class="mt-2">
+            <span class="badge bg-success">Confirmé</span>
+        </div>
     </div>
+@else
+    <p>Aucun rendez-vous confirmé</p>
+@endif
+    <a href="{{ route('patientservices') }}" class="btn-main mt-3">
+        Prendre un rendez-vous
+    </a>
+</div>
 
 </div>
 

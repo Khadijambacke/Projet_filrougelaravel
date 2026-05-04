@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function () {
    Route::post('/auth/login', [AuthApiController::class, 'login']);
    Route::post('/auth/register', [AuthApiController::class, 'register']);
 
+
    /**
     * Routes SERVICES (publiques)
     */
